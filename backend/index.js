@@ -1,10 +1,13 @@
 import express from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
+import connectDB from './utils/db.js';
+import dotenv from "dotenv";
+dotenv.config();
 
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 8000;
 
 app.get("/home",(req, res)=>{
     return res.status(200).json({
@@ -25,5 +28,6 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 app.listen(PORT , () => {
+    connectDB(); // Connect to the database when the server starts
     console.log(`Server is running on port ${PORT}`); // using template literals to print the port number
 });
