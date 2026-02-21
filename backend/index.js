@@ -4,10 +4,14 @@ import cookieParser from 'cookie-parser';
 import connectDB from './utils/db.js';
 import dotenv from "dotenv";
 import userRoutes from './routes/user.route.js';
+
 dotenv.config();
 
 
 const app = express();
+app.use(express.json());  
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser()); 
 const PORT = process.env.PORT || 8000;
 
 // Routes

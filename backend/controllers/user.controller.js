@@ -1,3 +1,9 @@
+import User from "../models/user.model.js";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+
+
+
 export const register =async(req, res)=>{
     try{
         const {fullname, email, phoneNumber, password, role} = req.body;
@@ -47,7 +53,7 @@ export const login = async(req, res)=>{
                 success: false
             })
         };
-        const user = await User.findOne({email});
+        let user = await User.findOne({email});
         if(!user){
             return res.status(400).json({
                 message: "User not found with this email",
@@ -121,18 +127,14 @@ export const logout = async(req, res)=>{
 export const updateProfile = async(req,res)=>{
     try{
         const {fullname, email, phoneNumber, bio, skills} = req.body;
-        if(!fullname || !email || !phoneNumber || !bio || !skills){
-            return res.status(400).json({
-                message: "Some fields are missing",
-                success: false
-            });
-        }
 
         //cloudinary se resume upload krne ke baad uska url mil jayega , usko bhi yaha save krna hai user ke profile me
 
-        const skillsArray =  skills.split(",");
+        if(skills){
+            const skillsArray =  skills.split(",");
+        }
         const userId = req.id; // middleware se id milta hai
-        let user = await user.findById(userId);
+        let user = await User.findById(userId);
         if(!user){
             return res.status(404).json({
                 message: "User not found",
@@ -140,11 +142,14 @@ export const updateProfile = async(req,res)=>{
             })
         }
 // updating data
-        user.fullname = fullname;
-        user.email = email;
-        user.phoneNumber = phoneNumber;
-        user.profile.bio = bio;
-        user.profile.skills = skillsArray;
+        if(fullname) user.fullname = fullname;
+        if(email) user.email = email;
+        if(phoneNumber) user.phoneNumber = phoneNumber;
+        if(bio) user.profile.bio = bio;
+        if(skills){
+            const skillsArray =  skills.split(",");
+            if(skillsArray.length > 0) user.profile.skills = skillsArray;
+        }
        // resume updation we'll add later - jab ham cloudinary add krenge
 
         await user.save();
