@@ -3,11 +3,16 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import connectDB from './utils/db.js';
 import dotenv from "dotenv";
+import userRoutes from './routes/user.route.js';
 dotenv.config();
 
 
 const app = express();
 const PORT = process.env.PORT || 8000;
+
+// Routes
+app.use("/api/v1/user" , userRoutes);
+
 
 app.get("/home",(req, res)=>{
     return res.status(200).json({
