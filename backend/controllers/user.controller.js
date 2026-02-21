@@ -117,3 +117,59 @@ export const logout = async(req, res)=>{
         })
     }
 }
+
+export const updateProfile = async(req,res)=>{
+    try{
+        const {fullname, email, phoneNumber, bio, skills} = req.body;
+        if(!fullname || !email || !phoneNumber || !bio || !skills){
+            return res.status(400).json({
+                message: "Some fields are missing",
+                success: false
+            });
+        }
+
+        //cloudinary se resume upload krne ke baad uska url mil jayega , usko bhi yaha save krna hai user ke profile me
+
+        const skillsArray =  skills.split(",");
+        const userId = req.id; // middleware se id milta hai
+        let user = await user.findById(userId);
+        if(!user){
+            return res.status(404).json({
+                message: "User not found",
+                success: false
+            })
+        }
+// updating data
+        user.fullname = fullname;
+        user.email = email;
+        user.phoneNumber = phoneNumber;
+        user.profile.bio = bio;
+        user.profile.skills = skillsArray;
+       // resume updation we'll add later - jab ham cloudinary add krenge
+
+        await user.save();
+
+        user = {
+            _id: user._id,
+            fullname: user.fullname,
+            email: user.email,
+            phoneNumber: user.phoneNumber,
+            role: user.role,
+            profile: user.profile
+        }
+
+        return res.status(200).json({
+            message: "Profile updated successfully",
+            success: true,
+            user
+        });        
+        
+    }
+    catch(error){
+        console.log(error);
+        return res.status(500).json({
+            message: "Internal server error",
+            success: false
+        })
+    }
+}
