@@ -3,10 +3,10 @@ import Job from "../models/job.model.js";
 // for company to post a job
 export const postJob = async(req,res)=>{
     
-    const {title, description, requirements , salary , location , jobtType , experience , postition , companyId} = req.body;
+    const {title, description, requirements , salary , location , jobType , experience , position , companyId} = req.body;
     const userId = req.id; // logged in user id
     try{
-        if(!title || !description || !requirements || !salary || !location || !jobtType || !experience || !postition || !companyId){
+        if(!title || !description || !requirements || !salary || !location || !jobType || !experience || !position || !companyId){
             return res.status(400).json({
                 message: "All fields are required",
                 success: false
@@ -18,9 +18,9 @@ export const postJob = async(req,res)=>{
             requirements : requirements.split(","), // convert comma separated string to array
             salary : Number(salary), // convert salary to number
             location,
-            jobtType,
+            jobType,
             experience,
-            postition,
+            position,
             company: companyId,
             created_by: userId
         });
@@ -50,7 +50,7 @@ export const getAllJobs = async(req, res)=>{
 
             ]
         }
-        const jobs = await Job.find(query);
+        const jobs = await Job.find(query).populate({path : "company"}).sort({createdAt : -1}); // sort by latest jobs and populate company details
         return res.status(200).json({
             message: "Jobs fetched successfully",
             success: true,
@@ -68,7 +68,7 @@ export const getAllJobs = async(req, res)=>{
 }
 
 // for students to get job details by job id
-export const = getJobById = async(req, res)=>{
+export const getJobById = async(req, res)=>{
     try{
         const jobId = req.params.id;
         const job = await Job.findById(jobId);
