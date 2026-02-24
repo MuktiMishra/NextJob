@@ -41,9 +41,9 @@ export const registerCompany = async(req, res)=>{
 export const getCompany = async(req, res)=>{
     try{
         const userId = req.id; // logged in userID
-        const company = await Company.findOne({userId});
-        if(!company){
-            return res.status(400).json({\
+        const companies = await Company.find({userId});
+        if(!companies || companies.length === 0){
+            return res.status(400).json({
                 message: "Company not found for this user",
                 success: false
             });
@@ -51,7 +51,7 @@ export const getCompany = async(req, res)=>{
         return res.status(200).json({
             message: "Company details fetched successfully",
             success: true,
-            company
+            companies
         });
     }   
     
@@ -100,7 +100,7 @@ export const updateCompany = async(req, res)=>{
         
         const updateData = {name , description, website, location};
       
-        const company = await Company.findByIdAndUpdate(companyId, updateData, {new: true});\
+        const company = await Company.findByIdAndUpdate(companyId, updateData, {new: true});
         if(!company){
             return res.status(400).json({
                 message: "Company not found with this id",
