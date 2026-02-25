@@ -1,7 +1,8 @@
 import User from "../models/user.model.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-
+import cloudinary from "../utils/cloudinary.js"; 
+import getDataUri from "../utils/datauri.js"; 
 
 
 export const register =async(req, res)=>{
@@ -13,6 +14,10 @@ export const register =async(req, res)=>{
                 success: false
             })
         };
+        const file = req.file;
+        const fileUri = getDataUri(file);
+        const cloudResponse = await cloudinary.uploader.upload(fileUri.content);
+
         const user = await User.findOne({email});
         if(user){
             return res.status(400).json({
@@ -27,7 +32,10 @@ export const register =async(req, res)=>{
             email,
             phoneNumber,
             password: hashedPassword,
-            role
+            role, 
+            profile: {
+                profilePhoto: cloudResponse.secure_url
+            }
         });
         return res.status(201).json({
             message: "User created successfully",
@@ -130,6 +138,10 @@ export const updateProfile = async(req,res)=>{
 
         //cloudinary se resume upload krne ke baad uska url mil jayega , usko bhi yaha save krna hai user ke profile me
 
+        const file = req.file;
+        const fileUri = getDataUri(file);
+        const cloudResponse = await cloudinary.uploader.upload(fileUri.content);
+
         if(skills){
             const skillsArray =  skills.split(",");
         }
@@ -152,6 +164,10 @@ export const updateProfile = async(req,res)=>{
         }
        // resume updation we'll add later - jab ham cloudinary add krenge
 
+        if(cloudResponse){
+            user.profile.resume = cloudResponse.secure_url // save the cloudinary url
+            user.profile.resumeOriginalName = file.originalname // Save the original file name
+        }
         await user.save();
 
         user = {
