@@ -3,6 +3,7 @@ import Register from "./pages/auth/Register";
 import Login from "./pages/auth/Login";
 import Dashboard from "./pages/Dashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
+import PostJob from "./pages/recruiter/PostJob.jsx"; 
 
 function App() {
   return (
@@ -21,6 +22,14 @@ function App() {
               <Dashboard />
             </ProtectedRoute>
           }
+        />
+        <Route 
+            path="/postjob"
+            element={
+                <ProtectedRoute>
+                    <PostJob /> 
+                </ProtectedRoute>
+            }
         />
 
       </Routes>

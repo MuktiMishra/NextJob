@@ -39,7 +39,7 @@ const Login = () => {
           name="email"
           placeholder="Email"
           onChange={(e) => setForm({ ...form, email: e.target.value })}
-          className="input"
+          className="input text-black"
         />
 
         <input
@@ -47,13 +47,13 @@ const Login = () => {
           name="password"
           placeholder="Password"
           onChange={(e) => setForm({ ...form, password: e.target.value })}
-          className="input mt-3"
+          className="input mt-3 text-black"
         />
 
         <select
           name="role"
           onChange={(e) => setForm({ ...form, role: e.target.value })}
-          className="input mt-3"
+          className="input mt-3 text-black"
         >
           <option value="">Select Role</option>
           <option value="student">Student</option>

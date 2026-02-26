@@ -8,8 +8,6 @@ const Dashboard = () => {
 
   return (
     <div className="min-h-screen bg-gray-100">
-      <Navbar />
-
       {user?.role === "student" && <StudentDashboard />}
       {user?.role === "recruiter" && <RecruiterDashboard />}
     </div>
