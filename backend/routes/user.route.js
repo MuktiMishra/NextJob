@@ -10,5 +10,6 @@ userRouter.route('/register').post(singleUpload, register);
 userRouter.route('/login').post(login);
 userRouter.route('/profile/update').post(isAuthenticated, singleUpload, updateProfile);
 userRouter.route('/logout').get(isAuthenticated, logout);
+userRouter.route('/validate').post(isAuthenticated);
 
 export default userRouter;

@@ -51,7 +51,11 @@ const authSlice = createSlice({
     loading: false,
     error: null,
   },
-  reducers: {},
+  reducers: {
+      setUserData: (state, action) => {
+          state.user = action.payload;
+      }
+  },
  extraReducers: (builder) => {
   builder
     // REGISTER
@@ -129,5 +133,7 @@ const authSlice = createSlice({
     });
   }
 });
+
+export const { setUserData } = authSlice.actions;
 
 export default authSlice.reducer;

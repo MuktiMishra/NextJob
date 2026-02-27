@@ -83,8 +83,8 @@ export const login = async(req, res)=>{
             })
         }
         const tokenData = {
-            userId: user._id
-
+            userId: user._id,
+            userRole: user.role
         }
 
 
@@ -100,7 +100,8 @@ export const login = async(req, res)=>{
             profile: user.profile
         }
 
-        res.status(200).cookie("token", token , { maxAge: 1*24*60*60*1000, httpOnly: true , sameSite:'strict'}).json({
+        // set cookies secure and to strict in prod
+        res.status(200).cookie("token", token , { maxAge: 1*24*60*60*1000, httpOnly: true , sameSite:'lax', secure: false}).json({
             message: `Welcome back ! ${user.fullname}`,
             success: true,
             user
@@ -194,3 +195,4 @@ export const updateProfile = async(req,res)=>{
         })
     }
 }
+

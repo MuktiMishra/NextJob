@@ -1,17 +1,38 @@
-import { useSelector } from "react-redux";
-import { Navigate } from "react-router-dom";
+import axios from "axios"
+import { Navigate } from 'react-router-dom'
+import { useState, useEffect } from "react"; 
+import {useDispatch} from 'react-redux'
+import {setUserData} from '../features/auth/authSlice.jsx';
 
 const ProtectedRoute = ({ children, allowedRole }) => {
-  // non persistent
-  const { user } = useSelector((state) => state.auth);
-    console.log(user); 
 
-  if (!user) return <Navigate to="/login" />;
+  const [isVerified, setIsVerified] = useState(null);
+    const dispatch = useDispatch();
 
-  if (allowedRole && user.role !== allowedRole)
-    return <Navigate to="/dashboard" />;
 
-  return children;
+    useEffect(() => {
+
+        const verifyUser = async () => {
+            const response = await axios.post('http://localhost:8000/api/v1/user/validate',{},            {
+                withCredentials: true
+            }); 
+
+            if (response.status === 200) {
+                dispatch(setUserData(response.data.data))
+                return setIsVerified(true); 
+            } else {
+                return setIsVerified(false)
+            }
+        }
+
+        verifyUser(); 
+
+    }, [])
+
+    if (isVerified === null) return <div>Loading...</div>; 
+
+    if (isVerified) return children;
+    else return <Navigate to='/login' />
 };
 
 export default ProtectedRoute;
