@@ -4,6 +4,7 @@ import Login from "./pages/auth/Login";
 import Dashboard from "./pages/Dashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
 import PostJob from "./pages/recruiter/PostJob.jsx"; 
+import UpdateProfile from "./pages/student/UpdateProfile.jsx";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
 
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/student/profile" element={<UpdateProfile />} />
 
         <Route
           path="/dashboard"
