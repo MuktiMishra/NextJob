@@ -5,13 +5,14 @@ import Dashboard from "./pages/Dashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
 import PostJob from "./pages/recruiter/PostJob.jsx"; 
 import UpdateProfile from "./pages/student/UpdateProfile.jsx";
+import LandingPage from "./components/LandingPage.jsx";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
 
-        <Route path="/" element={<Navigate to="/login" />} />
+        <Route path="/" element={<LandingPage />} />
 
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
