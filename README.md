@@ -45,7 +45,7 @@ Users can create professional profiles, browse and apply for jobs, while recruit
 - Redux Toolkit (State Management)
 - React Router DOM
 - Axios
-- Tailwind CSS / Chakra UI
+- Tailwind CSS
 
 ## Backend
 - Node.js
@@ -60,9 +60,9 @@ Users can create professional profiles, browse and apply for jobs, while recruit
 # Architecture
 
 Client (React Frontend)  
-⬇  
+|
 REST API (Express Backend)  
-⬇  
+|
 MongoDB Database  
 
 - Authentication handled via JWT
