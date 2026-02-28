@@ -4,6 +4,7 @@ import Job from "../models/job.model.js";
 export const postJob = async(req,res)=>{
     
     const {title, description, requirements , salary , location , jobType , experience , position , companyId} = req.body;
+    console.log(req.body)
     const userId = req.id; // logged in user id
     try{
         if(!title || !description || !requirements || !salary || !location || !jobType || !experience || !position || !companyId){
@@ -15,11 +16,11 @@ export const postJob = async(req,res)=>{
         const job = await Job.create({
             title,
             description,
-            requirements : requirements.split(","), // convert comma separated string to array
+            requirements : requirements,
             salary : Number(salary), // convert salary to number
             location,
             jobType,
-            experience,
+            experience: Number(experience),
             position,
             company: companyId,
             created_by: userId
@@ -71,7 +72,7 @@ export const getAllJobs = async(req, res)=>{
 export const getJobById = async(req, res)=>{
     try{
         const jobId = req.params.id;
-        const job = await Job.findById(jobId);
+        const job = await Job.findById(jobId).populate('company');
         if(!job){
             return res.status(400).json({
                 message: "Job not found with this id",

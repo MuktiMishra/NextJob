@@ -6,6 +6,8 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import PostJob from "./pages/recruiter/PostJob.jsx"; 
 import UpdateProfile from "./pages/student/UpdateProfile.jsx";
 import LandingPage from "./components/LandingPage.jsx";
+import DetailedJob from "./pages/job/DetailedJob.jsx"
+import Application from './pages/apply/Application.jsx'
 
 function App() {
   return (
@@ -34,6 +36,23 @@ function App() {
                 </ProtectedRoute>
             }
         />
+        <Route 
+            path="/job/:jobid"
+            element={
+                <ProtectedRoute>
+                    <DetailedJob /> 
+                </ProtectedRoute>
+            }
+        />
+         <Route 
+            path="/apply/:jobid"
+            element={
+                <ProtectedRoute>
+                    <Application /> 
+                </ProtectedRoute>
+            }
+        />
+
 
       </Routes>
     </BrowserRouter>
