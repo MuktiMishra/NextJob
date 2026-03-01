@@ -35,7 +35,7 @@ const Application = () => {
     return (
         <div className="min-h-screen bg-[#F6F7F8]">
             <div className="max-w-7xl flex justify-center gap-x-16 mx-auto p-6">
-                <div className="w-[60vh] ">
+                <div className=" ">
                     <p className="text-blue-600 tracking-wide">Job Application</p>    
                     <p className="mt-4 text-4xl font-bold text-black tracking-tight">Apply for {job.title}</p>
                     

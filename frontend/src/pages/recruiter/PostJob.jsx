@@ -64,13 +64,13 @@ const PostJob = () => {
     }
 
     return (
-        <div className="w-full p-4 h-screen bg-[#F6F7F8]"> 
+        <div className="w-full p-4 bg-[#F6F7F8]"> 
            <div className="max-w-4xl h-full mx-auto ">
-              <div className="h-24">
+              <div className="">
                 <p className="text-black text-5xl">Post a Job</p> 
                 <p className="text-black tracking-wider mt-2.5">Fill in the details below to find your next best hire</p> 
               </div> 
-              <div className="rounded-xl p-5 flex flex-col gap-2 border border-gray-200 h-[85vh] bg-white w-full">
+              <div className="rounded-xl p-5 flex flex-col gap-2 border border-gray-200 bg-white w-full">
                 <p className="text-black mb-8 tracking-tighter text-3xl">Basic Information</p>
                 <div className="w-full grid grid-cols-2 gap-x-4 gap-y-2">
                     {basicDetailsConfig.map((item, _) => {
@@ -88,7 +88,7 @@ const PostJob = () => {
                 </div> 
                 <div>
                     <p className="text-black tracking-tighter text-3xl mb-8">Details & Content</p> 
-                    <div className="w-full h-80">
+                    <div className="w-full">
                         <div className="flex flex-col gap-y-2 text-black">
                             Job Description
                             <textarea onChange={(e) => setDetailsAndContent(prev => {return {...prev, ['description']: e.target.value}})} placeholder="Describe the role, the team and what a typical day looks like..." className="text-black h-24 p-2 resize-none border border-gray-300 active:outline-none focus:outline-purple-600 rounded-lg"/>
