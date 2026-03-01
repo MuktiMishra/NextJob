@@ -3,6 +3,7 @@ import Job from "../models/job.model.js";
 
 export const applyJob = async (req, res) => {
     try {
+        const {portfolio, coverLetter} = req.body; 
         const userId = req.id;
         const jobId = req.params.id;
         if (!jobId) {
@@ -33,6 +34,8 @@ export const applyJob = async (req, res) => {
         const newApplication = await Application.create({
             job:jobId,
             applicant:userId,
+            coverLetter, 
+            portfolio
         });
 
         job.applications.push(newApplication._id);

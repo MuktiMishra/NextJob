@@ -4,7 +4,7 @@ import { applyJob, getApplicants, getAppliedJobs, updateStatus } from "../contro
  
 const applicationrouter = express.Router();
 
-applicationrouter.route("/apply/:id").get(isAuthenticated, applyJob);
+applicationrouter.route("/apply/:id").post(isAuthenticated, applyJob);
 applicationrouter.route("/get").get(isAuthenticated, getAppliedJobs);
 applicationrouter.route("/:id/applicants").get(isAuthenticated, getApplicants);
 applicationrouter.route("/status/:id/update").post(isAuthenticated, updateStatus);

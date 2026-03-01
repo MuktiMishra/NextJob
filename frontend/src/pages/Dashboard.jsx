@@ -1,7 +1,6 @@
 import { useSelector } from "react-redux";
 import StudentDashboard from "./student/StudentDashboard";
 import RecruiterDashboard from "./recruiter/RecruiterDashboard";
-import Navbar from "../components/Navbar";
 
 const Dashboard = () => {
   const { user } = useSelector((state) => state.auth);
