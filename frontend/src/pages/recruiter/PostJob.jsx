@@ -64,7 +64,7 @@ const PostJob = () => {
     }
 
     return (
-        <div className="w-full p-4 bg-[#F6F7F8]"> 
+        <div className="min-h-screen p-4 bg-[#F6F7F8]"> 
            <div className="max-w-4xl h-full mx-auto ">
               <div className="">
                 <p className="text-black text-5xl">Post a Job</p> 
@@ -72,7 +72,7 @@ const PostJob = () => {
               </div> 
               <div className="rounded-xl p-5 flex flex-col gap-2 border border-gray-200 bg-white w-full">
                 <p className="text-black mb-8 tracking-tighter text-3xl">Basic Information</p>
-                <div className="w-full grid grid-cols-2 gap-x-4 gap-y-2">
+                <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-x-4 gap-y-2">
                     {basicDetailsConfig.map((item, _) => {
                         return <div key={item.label} className="text-black gap-y-2 py-0 flex flex-col">
                                 {item.label}

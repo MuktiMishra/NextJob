@@ -3,12 +3,15 @@ import { FaRocket, FaRegUserCircle } from "react-icons/fa";
 import { MdOutlineDashboard } from "react-icons/md";
 import { IoMdBriefcase } from "react-icons/io";
 import { CiCirclePlus } from "react-icons/ci";
+import {useNavigate} from 'react-router-dom'
 
 const SideBar = () => {
 
+    const navigate = useNavigate(); 
+
     const elements = [
         { title: "Dashboard", href: "/dashboard", icon: <MdOutlineDashboard />}, {
-        title: "My Jobs", href: "/myjobs", icon: <IoMdBriefcase />}, {
+        title: "My Jobs", href: "/job/myjobs", icon: <IoMdBriefcase />}, {
         title: "Post a job", href: "/post", icon: <CiCirclePlus />}, {
         title: "Candidates", href: "/candidates", icon: <FaRegUserCircle />},
     ];
@@ -27,7 +30,7 @@ const SideBar = () => {
             
             <div className="flex p-2 gap-2 px-5 flex-col grow">
                 {elements.map((item) => (
-                    <button className="text-black flex items-center hover:text-blue-600 cursor-pointer gap-4 hover:bg-blue-200 p-2 "> 
+                    <button onClick={() => navigate(`${item.href}`)} className="text-black flex items-center hover:text-blue-600 cursor-pointer gap-4 hover:bg-blue-200 p-2 "> 
                         <span className="text-xl">{item.icon}</span> 
                         {item.title}
                     </button> 
