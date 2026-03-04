@@ -48,7 +48,7 @@
     scroll-behavior: smooth;
   }
   body {
-    @apply bg-navy-950 text-slate-200 font-body antialiased;
+    @apply text-slate-200 font-body antialiased;
     min-height: 100vh;
   }
 }

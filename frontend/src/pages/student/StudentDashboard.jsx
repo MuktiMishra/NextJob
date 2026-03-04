@@ -63,7 +63,7 @@ const StudentDashboard = () => {
 
   const sidebarItems = [
     { label: "Dashboard", path: "/student/dashboard" },
-    { label: "My Applications", path: "/student/applications" },
+    { label: "My Applications", path: "/job/myjobs" },
     { label: "Saved Jobs", path: "/student/saved" },
     { label: "My Profile", path: "/student/profile" },
     { label: "Settings", path: "/student/settings" },

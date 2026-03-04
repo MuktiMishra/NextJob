@@ -49,7 +49,7 @@ const DetailedJob = () => {
                        <p className="bg-purple-400/80 p-3 inline text-purple-800 rounded-xl"><CiClock1 className="inline mr-2" />{job.experience} Year(s)</p> 
                     </div>
               </div>
-              {user.role !== 'student' && <div className="flex justify-between items-center rounded-lg border border-gray-300 p-4 bg-white">
+              {user.role !== 'recruiter' && <div className="flex justify-between items-center rounded-lg border border-gray-300 p-4 bg-white">
                   <div>
                     <p className="text-2xl tracking-tight">Ready to Apply?</p>
                   </div>
