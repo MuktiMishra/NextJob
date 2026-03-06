@@ -3,7 +3,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import cloudinary from "../utils/cloudinary.js"; 
 import getDataUri from "../utils/datauri.js"; 
-
+import Application from "../models/application.model.js"
 
 export const register =async(req, res)=>{
     try{
@@ -196,3 +196,21 @@ export const updateProfile = async(req,res)=>{
     }
 }
 
+export const getDashboardData = async (req, res) => {
+    const studentId = req.id; 
+    try {
+       const data = await Application.find({applicant: studentId}).populate('applicant').populate({
+           path: 'job',
+           populate: {
+               path: 'company'
+           }
+       });  
+        return res.status(200).json({message: "Found succeess", success: true, data})
+    } catch (err) {
+        console.log("error in dashboard", err)
+        return res.status(500).json({
+            message: "Internal Server error",
+            success: false 
+        })
+    }
+}

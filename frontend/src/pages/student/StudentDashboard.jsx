@@ -28,6 +28,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { CheckCircle, Clock, Eye, Send } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
+import axios from 'axios'
 
 const stats = [
   { id: 1, title: "Total Applied", value: 24, icon: Send },
@@ -36,7 +37,7 @@ const stats = [
   { id: 4, title: "Profile Views", value: 142, icon: Eye },
 ];
 
-const applications = [
+const mockApplications = [
   {
     company: "Spotify",
     role: "Senior UX Designer",
@@ -60,11 +61,22 @@ const applications = [
 const StudentDashboard = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const [applications, setApplications] = React.useState([])
+
+    React.useEffect(() => {
+        const getData = async () => {
+            const res = await axios.get('http://localhost:8000/api/v1/user/getdashboarddata', {withCredentials: true}); 
+            console.log("res", res)
+            if (res.status === 201 || res.status === 200) setApplications(res.data.data)
+        }
+
+        getData(); 
+    }, [])
 
   const sidebarItems = [
     { label: "Dashboard", path: "/student/dashboard" },
     { label: "My Applications", path: "/job/myjobs" },
-    { label: "Saved Jobs", path: "/student/saved" },
+    { label: "Search", path: "/search" },
     { label: "My Profile", path: "/student/profile" },
     { label: "Settings", path: "/student/settings" },
   ];
@@ -121,10 +133,8 @@ const StudentDashboard = () => {
           </div>
         </div>
 
-        {/* Main Content */}
         <div className="col-span-12 md:col-span-9 space-y-6">
 
-          {/* Header */}
           <div className="flex items-center justify-between">
             <div>
               <h1 className="text-3xl font-bold">Dashboard Overview</h1>
@@ -140,7 +150,6 @@ const StudentDashboard = () => {
             </button>
           </div>
 
-          {/* Stats */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {stats.map((stat) => (
               <motion.div
@@ -158,12 +167,11 @@ const StudentDashboard = () => {
             ))}
           </div>
 
-          {/* Recent Applications */}
           <div className="bg-white rounded-2xl shadow p-6">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-lg font-semibold">Recent Applications</h2>
               <button
-                onClick={() => navigate("/student/applications")}
+                onClick={() => navigate("/job/myJobs")}
                 className="text-sm text-black hover:underline"
               >
                 View All
@@ -184,13 +192,13 @@ const StudentDashboard = () => {
                 <tbody>
                   {applications.map((app, index) => (
                     <tr key={index} className="border-b last:border-none">
-                      <td className="py-4 font-medium">{app.company}</td>
-                      <td>{app.role}</td>
-                      <td>{app.date}</td>
+                      <td className="py-4 font-medium">{app.job.company.name}</td>
+                      <td>{app.job.position}</td>
+                      <td>{app.createdAt.split('T')[0]}</td>
                       <td>
                         <span
                           className={`px-3 py-1 text-xs rounded-full ${
-                            app.status === "Interview"
+                            app.status === "Accepted"
                               ? "bg-green-100 text-green-700"
                               : app.status === "Rejected"
                               ? "bg-red-100 text-red-700"

@@ -67,7 +67,7 @@ const MyJobsStudent = () => {
                                         </span>
                                     </td>
                                     <td className="px-4 py-4">
-                                        <button onClick={() => navigate(`/jobs/${item.job?._id}`, {state: item.job})} className="hover:text-blue-600">
+                                        <button onClick={() => navigate(`/job/${item.job?._id}`, {state: item.job})} className="hover:text-blue-600">
                                             <MdExitToApp size={24}/>
                                         </button>
                                     </td>

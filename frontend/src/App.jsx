@@ -10,6 +10,7 @@ import DetailedJob from "./pages/job/DetailedJob.jsx"
 import Application from './pages/apply/Application.jsx'
 import MyJobs from './pages/job/MyJobs.jsx'
 import ReviewJob from './pages/recruiter/ReviewJob.jsx'
+import SearchJob from './pages/job/SearchJob.jsx'
 
 function App() {
   return (
@@ -67,6 +68,14 @@ function App() {
             element={
                 <ProtectedRoute>
                     <ReviewJob /> 
+                </ProtectedRoute>
+            }
+        />
+        <Route 
+            path="/search"
+            element={
+                <ProtectedRoute>
+                    <SearchJob /> 
                 </ProtectedRoute>
             }
         />
