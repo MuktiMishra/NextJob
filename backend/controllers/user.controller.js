@@ -5,7 +5,7 @@ import cloudinary from "../utils/cloudinary.js";
 import getDataUri from "../utils/datauri.js"; 
 import Application from "../models/application.model.js"
 
-export const register =async(req, res)=>{
+export const register = async(req, res)=>{
     try{
         const {fullname, email, phoneNumber, password, role} = req.body;
         if(!fullname || !email || !phoneNumber || !password|| !role){
@@ -15,6 +15,7 @@ export const register =async(req, res)=>{
             })
         };
         const file = req.file;
+        console.log("file", file)
         const fileUri = getDataUri(file);
         const cloudResponse = await cloudinary.uploader.upload(fileUri.content);
 
@@ -44,7 +45,7 @@ export const register =async(req, res)=>{
         });
     }
     catch(error){
-        console.log(error);
+        console.log("error", error);
         return res.status(500).json({
             message: "Internal server error",
             success: false

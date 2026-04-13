@@ -12,7 +12,7 @@ const SideBar = () => {
     const elements = [
         { title: "Dashboard", href: "/dashboard", icon: <MdOutlineDashboard />}, {
         title: "My Jobs", href: "/job/myjobs", icon: <IoMdBriefcase />}, {
-        title: "Post a job", href: "/post", icon: <CiCirclePlus />}, {
+        title: "Post a job", href: "/postjob", icon: <CiCirclePlus />}, {
         title: "Candidates", href: "/candidates", icon: <FaRegUserCircle />},
     ];
 
@@ -29,8 +29,8 @@ const SideBar = () => {
             </div>
             
             <div className="flex p-2 gap-2 px-5 flex-col grow">
-                {elements.map((item) => (
-                    <button onClick={() => navigate(`${item.href}`)} className="text-black flex items-center hover:text-blue-600 cursor-pointer gap-4 hover:bg-blue-200 p-2 "> 
+                {elements.map((item, idx) => (
+                    <button key={idx} onClick={() => navigate(`${item.href}`)} className="text-black flex items-center hover:text-blue-600 cursor-pointer gap-4 hover:bg-blue-200 p-2 "> 
                         <span className="text-xl">{item.icon}</span> 
                         {item.title}
                     </button> 

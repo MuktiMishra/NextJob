@@ -10,12 +10,13 @@ const Register = () => {
     phoneNumber: "",
     password: "",
     role: "",
-    profilePhoto: null,
+    file: null,
   });
 
   const handleChange = (e) => {
-    if (e.target.name === "profilePhoto") {
-      setForm({ ...form, profilePhoto: e.target.files[0] });
+    if (e.target.name === "file") {
+      console.log(e.target.files); 
+      setForm({ ...form, file: e.target.files[0] });
     } else {
       setForm({ ...form, [e.target.name]: e.target.value });
     }
@@ -24,9 +25,7 @@ const Register = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData();
-    Object.keys(form).forEach((key) =>
-      formData.append(key, form[key])
-    );
+    Object.keys(form).forEach((key) => formData.append(key, form[key]));
     dispatch(registerUser(formData));
   };
 
@@ -36,39 +35,49 @@ const Register = () => {
         onSubmit={handleSubmit}
         className="bg-white p-8 rounded-xl shadow-lg w-96"
       >
-        <h2 className="text-2xl font-bold mb-6 text-center">
-          Register
-        </h2>
+        <h2 className="text-2xl font-bold mb-6 text-center">Register</h2>
 
-        <input name="fullname" placeholder="Full Name"
+        <input
+          name="fullname"
+          placeholder="Full Name"
           onChange={handleChange}
-          className="input" />
+          className="input"
+        />
 
-        <input name="email" placeholder="Email"
+        <input
+          name="email"
+          placeholder="Email"
           onChange={handleChange}
-          className="input mt-3" />
+          className="input mt-3"
+        />
 
-        <input name="phoneNumber" placeholder="Phone"
+        <input
+          name="phoneNumber"
+          placeholder="Phone"
           onChange={handleChange}
-          className="input mt-3" />
+          className="input mt-3"
+        />
 
-        <input type="password" name="password"
+        <input
+          type="password"
+          name="password"
           placeholder="Password"
           onChange={handleChange}
-          className="input mt-3" />
+          className="input mt-3"
+        />
 
-        <select name="role"
-          onChange={handleChange}
-          className="input mt-3">
+        <select name="role" onChange={handleChange} className="input mt-3">
           <option value="">Select Role</option>
           <option value="student">Student</option>
           <option value="recruiter">Recruiter</option>
         </select>
 
-        <input type="file"
-          name="profilePhoto"
+        <input
+          type="file"
+          name="file"
           onChange={handleChange}
-          className="mt-3" />
+          className="mt-3"
+        />
 
         <button className="w-full bg-black text-white mt-5 py-2 rounded-lg hover:bg-gray-800">
           Register
