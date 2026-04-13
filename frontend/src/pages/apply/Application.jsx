@@ -19,7 +19,7 @@ const Application = () => {
 
         try {
 
-            const response = await axios.post(`http://localhost:8000/api/v1/application/apply/${job._id}`, {coverLetter, portfolio}, {
+            const response = await axios.post(`https://next-job-rho.vercel.app/api/v1/application/apply/${job._id}`, {coverLetter, portfolio}, {
                 withCredentials: true
             })
 

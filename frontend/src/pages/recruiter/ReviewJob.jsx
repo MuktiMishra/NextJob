@@ -25,7 +25,7 @@ const ReviewJob = () => {
     const getApplicants = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8000/api/v1/application/${job._id}/applicants`,
+          `https://next-job-rho.vercel.app/api/v1/application/${job._id}/applicants`,
           { withCredentials: true },
         );
         if (response.status === 200 || response.status === 201) {
@@ -42,7 +42,7 @@ const ReviewJob = () => {
     setUpdatingStatus(applicationId);
     try {
       const response = await axios.post(
-        `http://localhost:8000/api/v1/application/status/${applicationId}/update`,
+        `https://next-job-rho.vercel.app/api/v1/application/status/${applicationId}/update`,
         { status: newStatus },
         { withCredentials: true },
       );

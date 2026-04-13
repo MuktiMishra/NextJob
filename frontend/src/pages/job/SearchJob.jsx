@@ -29,7 +29,7 @@ export default function JobSearch() {
   useEffect(() => {
     setLoading(true);
     const timeout = setTimeout(async () => {
-      const res = await axios.get(`http://localhost:8000/api/v1/job/get?keyword=${debouncedKeyword}`, {withCredentials: true});
+      const res = await axios.get(`https://next-job-rho.vercel.app/api/v1/job/get?keyword=${debouncedKeyword}`, {withCredentials: true});
       if (res.status === 201 || res.status === 200) setJobs(res.data.jobs);
         console.log(debouncedKeyword)
       setJobs(filterJobs(res.data.jobs, debouncedKeyword));

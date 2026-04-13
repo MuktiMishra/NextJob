@@ -17,7 +17,7 @@ const DetailedJob = () => {
 
         const getJobDetails = async () => {
             try{
-                const response = await axios.get(`http://localhost:8000/api/v1/job/get/${params.jobid}`, {withCredentials: true})
+                const response = await axios.get(`https://next-job-rho.vercel.app/api/v1/job/get/${params.jobid}`, {withCredentials: true})
 
                 if (response.status === 200) {
                     console.log(response)

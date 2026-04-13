@@ -39,7 +39,7 @@ const UpdateProfile = () => {
 
     try {
       const res = await axios.post(
-        "http://localhost:8000/api/v1/user/profile/update", // adjust base URL to yours
+        "https://next-job-rho.vercel.app/api/v1/user/profile/update", // adjust base URL to yours
         data,
         {
           withCredentials: true, // sends the JWT cookie automatically

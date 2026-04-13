@@ -65,7 +65,7 @@ const StudentDashboard = () => {
 
     React.useEffect(() => {
         const getData = async () => {
-            const res = await axios.get('http://localhost:8000/api/v1/user/getdashboarddata', {withCredentials: true}); 
+            const res = await axios.get('https://next-job-rho.vercel.app/api/v1/user/getdashboarddata', {withCredentials: true}); 
             console.log("res", res)
             if (res.status === 201 || res.status === 200) setApplications(res.data.data)
         }

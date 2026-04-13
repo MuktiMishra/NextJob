@@ -25,7 +25,7 @@ const PostJob = () => {
 
     React.useEffect(() => {
         const getCompanies = async () => {
-            const response = await axios.get('http://localhost:8000/api/v1/company/get', {withCredentials: true}); 
+            const response = await axios.get('https://next-job-rho.vercel.app/api/v1/company/get', {withCredentials: true}); 
 
             if (response.status === 200) {
                 console.log(response)
@@ -51,7 +51,7 @@ const PostJob = () => {
         const dataToSend = {...detailsAndContent, ...basicDetails}
 
         try {
-            const response = await axios.post('http://localhost:8000/api/v1/job/post', dataToSend, {withCredentials: true})
+            const response = await axios.post('https://next-job-rho.vercel.app/api/v1/job/post', dataToSend, {withCredentials: true})
 
             if (response.status === 201) {
                 return alert('job posted successfully')
