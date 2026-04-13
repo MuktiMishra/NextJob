@@ -3,7 +3,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import CustomToast from "../../components/CustomToast";
 
-const API = "http://localhost:8000/api/v1/user";
+const API = "https://next-job-rho.vercel.app/api/v1/user";
 
 // REGISTER
 export const registerUser = createAsyncThunk(
