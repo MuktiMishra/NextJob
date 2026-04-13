@@ -15,7 +15,7 @@ const PORT = process.env.PORT || 8000;
 
 /* -------------------- CORS FIRST -------------------- */
 const corsOptions = {
-    origin: "http://localhost:5173",
+    origin: "https://next-job-cvah-q7ywznk27-factduniyah-6903s-projects.vercel.app",
     credentials: true,
 };
 
